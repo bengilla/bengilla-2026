@@ -1,0 +1,483 @@
+.dashboard {
+    min-height: 100vh;
+    background: #f5f5f5;
+}
+
+/* Header */
+.dashHeader {
+    background: white;
+    border-bottom: 1px solid #e5e5e5;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+
+.dashHeaderInner {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 32px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dashBrand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.dashLogo {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #666;
+}
+
+.dashLabel {
+    font-size: 11px;
+    color: white;
+    background: #333;
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+.dashActions {
+    display: flex;
+    gap: 12px;
+}
+
+.backBtn,
+.logoutBtn {
+    height: 36px;
+    padding: 0 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-family: inherit;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+}
+
+.backBtn {
+    background: white;
+    border: 1px solid #e5e5e5;
+    color: #333;
+}
+
+.backBtn:hover {
+    background: #f8f8f8;
+}
+
+.logoutBtn {
+    background: white;
+    border: 1px solid #e5e5e5;
+    color: #999;
+}
+
+.logoutBtn:hover {
+    border-color: #e53935;
+    color: #e53935;
+}
+
+/* Main */
+.dashMain {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 32px;
+}
+
+.dashTitleRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 32px;
+}
+
+.dashTitle {
+    font-size: 28px;
+    font-weight: 500;
+    color: #666;
+}
+
+.addBtn {
+    height: 42px;
+    padding: 0 20px;
+    background: #1a1a1a;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: opacity 0.2s;
+}
+
+.addBtn:hover {
+    opacity: 0.85;
+}
+
+.loading,
+.empty {
+    text-align: center;
+    padding: 80px 0;
+    color: #999;
+}
+
+.empty button {
+    margin-top: 16px;
+    padding: 10px 24px;
+    background: #1a1a1a;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* Project List */
+.projectList {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.projectCard {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    transition: box-shadow 0.2s;
+}
+
+.projectCard:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.projectThumb {
+    width: 120px;
+    height: 80px;
+    border-radius: 8px;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: #f0f0f0;
+}
+
+.projectThumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.projectInfo {
+    flex: 1;
+    min-width: 0;
+}
+
+.projectInfo h3 {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 4px;
+    color: #333;
+}
+
+.projectInfo p {
+    font-size: 13px;
+    color: #999;
+    margin-bottom: 2px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.projectInfo span {
+    font-size: 12px;
+    color: #999;
+}
+
+.projectActions {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.editBtn,
+.deleteBtn {
+    height: 36px;
+    padding: 0 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-family: inherit;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+}
+
+.editBtn {
+    background: white;
+    border: 1px solid #e5e5e5;
+    color: #333;
+}
+
+.editBtn:hover {
+    background: #f8f8f8;
+    border-color: #333;
+}
+
+.deleteBtn {
+    background: white;
+    border: 1px solid #f5c6c6;
+    color: #e53935;
+}
+
+.deleteBtn:hover {
+    background: #fff3f3;
+}
+
+.deleteBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+    .dashMain {
+        padding: 24px 16px;
+    }
+
+    .projectCard {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .projectThumb {
+        width: 100%;
+        height: 160px;
+    }
+
+    .projectActions {
+        width: 100%;
+    }
+
+    .editBtn,
+    .deleteBtn {
+        flex: 1;
+        justify-content: center;
+    }
+}
+
+/* Modal Styles */
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(13, 13, 13, 0.85);
+    backdrop-filter: blur(40px) saturate(1.6);
+    -webkit-backdrop-filter: blur(40px) saturate(1.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modalContent {
+    background: rgba(30, 30, 30, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    width: 90%;
+    max-width: 400px;
+    overflow: hidden;
+    animation: slideUp 0.2s ease;
+}
+
+@keyframes slideUp {
+    from { transform: scale(0.96) translateY(16px); }
+    to { transform: scale(1) translateY(0); }
+}
+
+.modalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.modalTitle {
+    font-size: 16px;
+    font-weight: 500;
+    color: white;
+}
+
+.modalClose {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 14px;
+}
+
+.modalClose:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.modalBody {
+    padding: 24px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.modalFooter {
+    padding: 16px 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+}
+
+.modalBtn {
+    background: #1a1a1a;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.modalBtn:hover {
+    opacity: 0.85;
+}
+
+.modalCancelBtn {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.modalCancelBtn:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Form Styles */
+.formGroup {
+    margin-bottom: 16px;
+}
+
+.formGroup label {
+    display: block;
+    margin-bottom: 8px;
+    color: #888;
+    font-size: 14px;
+}
+
+.passwordInput {
+    position: relative;
+}
+
+.passwordInput input {
+    width: 100%;
+    padding: 10px;
+    padding-right: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: #fff;
+    font-size: 14px;
+}
+
+.passwordInput button {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #888;
+    cursor: pointer;
+}
+
+/* Status Text */
+.successText {
+    text-align: center;
+    color: #4ade80;
+}
+
+.warningText {
+    margin-bottom: 12px;
+    color: #ccc;
+}
+
+.errorText {
+    color: #f87171;
+    margin-bottom: 16px;
+}
+
+.dangerText {
+    color: #f87171;
+}
+
+/* Orphaned List */
+.orphanedList {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.orphanedItem {
+    margin-bottom: 8px;
+    font-size: 13px;
+}
+
+.fileList {
+    margin: 4px 0 0 16px;
+    color: #aaa;
+}
+
+/* Modal buttons */
+.modalConfirmBtn {
+    background: #4f46e5;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.modalConfirmBtn:hover {
+    opacity: 0.85;
+}

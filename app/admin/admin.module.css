@@ -1,0 +1,137 @@
+.loginPage {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f5f5f5;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.loginCard {
+    background: white;
+    border-radius: 16px;
+    padding: 48px 40px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+.loginLogo {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 32px;
+    letter-spacing: 1px;
+    color: #888;
+}
+
+.loginTitle {
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 32px;
+    color: #1a1a1a;
+}
+
+.loginForm {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.formGroup label {
+    font-size: 13px;
+    color: #666;
+    font-weight: 500;
+}
+
+.formGroup input {
+    height: 44px;
+    padding: 0 14px;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    font-size: 15px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.formGroup input:focus {
+    border-color: #333;
+}
+
+.passwordWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.passwordWrapper input {
+    width: 100%;
+    padding-right: 44px;
+}
+
+.togglePassword {
+    position: absolute;
+    right: 12px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #999;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+}
+
+.togglePassword:hover {
+    color: #333;
+}
+
+.errorMsg {
+    color: #e53935;
+    font-size: 13px;
+    text-align: center;
+    padding: 8px 12px;
+    background: #fff3f3;
+    border-radius: 6px;
+}
+
+.loginBtn {
+    height: 46px;
+    background: #1a1a1a;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-family: inherit;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    margin-top: 8px;
+}
+
+.loginBtn:hover {
+    opacity: 0.85;
+}
+
+.loginBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.hint {
+    margin-top: 24px;
+    text-align: center;
+    font-size: 12px;
+    color: #999;
+}
