@@ -20,6 +20,7 @@ build/
 # Data files - contain sensitive admin credentials
 data.json
 data.backup.json
+lib/auth.json
 
 # User uploaded files
 public/uploads/

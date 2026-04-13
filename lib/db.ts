@@ -1,34 +1,29 @@
 import bcrypt from 'bcryptjs';
 import { v4 as uuidv4 } from 'uuid';
-import { readFile, writeFile } from 'fs/promises';
+import { readFile, writeFile, mkdir } from 'fs/promises';
 import { existsSync } from 'fs';
 import path from 'path';
 import type { ImageItem, Project, Admin } from './types';
 
 const DATA_FILE = path.join(process.cwd(), 'data.json');
+const AUTH_FILE = path.join(process.cwd(), 'lib', 'auth.json');
 
 export type { ImageItem, Project, Admin };
 export { CATEGORIES, getCategoryLabel } from './types';
 
-interface Data {
+interface ProjectData {
   projects: Project[];
+}
+
+interface AuthData {
   admins: Admin[];
 }
 
-export async function readData(): Promise<Data> {
-  // 支持环境变量设置初始密码，默认 admin123
-  const defaultPassword = process.env.ADMIN_PASSWORD || 'admin123';
-
+// 读取项目数据
+export async function readData(): Promise<ProjectData> {
   if (!existsSync(DATA_FILE)) {
-    const initial: Data = { projects: [], admins: [] };
-    const hashed = bcrypt.hashSync(defaultPassword, 10);
-    initial.admins.push({
-      id: uuidv4(),
-      username: 'admin',
-      password: hashed,
-      created_at: new Date().toISOString(),
-    });
-
+    const initial: ProjectData = { projects: [] };
+    
     // 插入示例项目
     initial.projects = [
       {
@@ -104,12 +99,12 @@ export async function readData(): Promise<Data> {
       }
     }
     await writeFile(DATA_FILE, JSON.stringify(initial, null, 2));
-    console.log('✅ Data file created with admin/admin123');
+    console.log('✅ Data file created with sample projects');
     return initial;
   }
 
   const content = await readFile(DATA_FILE, 'utf-8');
-  const data: Data = JSON.parse(content);
+  const data: ProjectData = JSON.parse(content);
 
   // 迁移：给旧项目补上缺失字段
   for (const p of data.projects) {
@@ -128,8 +123,47 @@ export async function readData(): Promise<Data> {
   return data;
 }
 
-async function writeData(data: Data): Promise<void> {
+async function writeData(data: ProjectData): Promise<void> {
   await writeFile(DATA_FILE, JSON.stringify(data, null, 2));
+}
+
+// 读取认证数据
+async function readAuth(): Promise<AuthData> {
+  if (!existsSync(AUTH_FILE)) {
+    // 自动创建默认管理员
+    const defaultPassword = process.env.ADMIN_PASSWORD || 'admin123';
+    const hashed = bcrypt.hashSync(defaultPassword, 10);
+    const initial: AuthData = {
+      admins: [{
+        id: 'admin',
+        username: 'admin',
+        password: hashed,
+        created_at: new Date().toISOString(),
+      }]
+    };
+    
+    // 确保 lib 目录存在
+    const libDir = path.dirname(AUTH_FILE);
+    if (!existsSync(libDir)) {
+      await mkdir(libDir, { recursive: true });
+    }
+    
+    await writeFile(AUTH_FILE, JSON.stringify(initial, null, 2));
+    console.log('✅ Auth file created with admin/admin123');
+    return initial;
+  }
+
+  const content = await readFile(AUTH_FILE, 'utf-8');
+  return JSON.parse(content);
+}
+
+async function writeAuth(data: AuthData): Promise<void> {
+  // 确保 lib 目录存在
+  const libDir = path.dirname(AUTH_FILE);
+  if (!existsSync(libDir)) {
+    await mkdir(libDir, { recursive: true });
+  }
+  await writeFile(AUTH_FILE, JSON.stringify(data, null, 2));
 }
 
 // ==================== 项目操作 ====================
@@ -233,15 +267,15 @@ export async function deleteImage(id: string): Promise<void> {
 
 // ==================== 管理员操作 ====================
 export async function getAdminByUsername(username: string): Promise<Admin | undefined> {
-  const data = await readData();
-  return data.admins.find((a) => a.username === username);
+  const auth = await readAuth();
+  return auth.admins.find((a) => a.username === username);
 }
 
 export async function updateAdminPassword(username: string, newPassword: string): Promise<void> {
-  const data = await readData();
-  const admin = data.admins.find((a) => a.username === username);
+  const auth = await readAuth();
+  const admin = auth.admins.find((a) => a.username === username);
   if (admin) {
     admin.password = bcrypt.hashSync(newPassword, 10);
-    await writeData(data);
+    await writeAuth(auth);
   }
 }
