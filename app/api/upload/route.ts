@@ -63,34 +63,29 @@ export async function POST(request: NextRequest) {
     }
 
     const project = await getProjectById(projectId);
-  if (!project) {
-    return NextResponse.json(
-      { error: 'Project not found' },
-      { status: 404 }
-    );
-  }
+    if (!project) {
+      return NextResponse.json(
+        { error: 'Project not found' },
+        { status: 404 }
+      );
+    }
 
-  const uploadDir = path.join(process.cwd(), 'public', 'uploads', projectId);
+    const uploadDir = path.join(process.cwd(), 'public', 'uploads', projectId);
 
-  await mkdir(uploadDir, { recursive: true });
+    await mkdir(uploadDir, { recursive: true });
 
-  await writeFile(path.join(uploadDir, filename), buffer);
+    await writeFile(path.join(uploadDir, filename), buffer);
 
-  const thumbBuffer = await sharp(buffer)
-    .resize(400, null, { withoutEnlargement: true })
-    .toBuffer();
-  await writeFile(path.join(uploadDir, thumbFilename), thumbBuffer);
+    const thumbBuffer = await sharp(buffer)
+      .resize(400, null, { withoutEnlargement: true })
+      .toBuffer();
+    await writeFile(path.join(uploadDir, thumbFilename), thumbBuffer);
 
-  const url = `/uploads/${projectId}/${filename}`;
-  const thumbUrl = `/uploads/${projectId}/${thumbFilename}`;
-  
-  try {
+    const url = `/uploads/${projectId}/${filename}`;
+    const thumbUrl = `/uploads/${projectId}/${thumbFilename}`;
+    
     const image = await addImage(projectId, url, filename, thumbUrl);
     return NextResponse.json({ image }, { status: 201 });
-  } catch (error) {
-    console.error('Add image error:', error);
-    return NextResponse.json({ error: 'Failed to add image to project' }, { status: 500 });
-  }
   } catch (error) {
     console.error('Upload error:', error);
     return NextResponse.json({ error: 'Upload failed' }, { status: 500 });
