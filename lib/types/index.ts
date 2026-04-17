@@ -30,6 +30,7 @@ export interface Admin {
 export const CATEGORIES = [
   { value: 'stage', label: '舞台设计' },
   { value: 'lighting', label: '灯光设计' },
+  { value: 'exhibition', label: '展会设计' },
   { value: 'architecture', label: '建筑设计' },
   { value: 'product', label: '产品设计' },
   { value: 'graphic', label: '平面设计' },

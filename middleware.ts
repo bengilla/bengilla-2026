@@ -7,14 +7,15 @@ import { sessionOptions, type SessionData } from './lib/auth';
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // 保护需要认证的路由
+  // 保护需要认证的路由，排除登录路径
   const protectedPaths = [
     '/admin/dashboard',
-    '/api/admin',
     '/api/upload',
   ];
 
-  const isProtected = protectedPaths.some(path => pathname.startsWith(path));
+  // 保护 /api/admin 路径，但排除登录
+  const isAdminApi = pathname.startsWith('/api/admin') && !pathname.startsWith('/api/admin/login');
+  const isProtected = protectedPaths.some(path => pathname.startsWith(path)) || isAdminApi;
 
   if (isProtected) {
     const session = await getIronSession<SessionData>(cookies(), sessionOptions);

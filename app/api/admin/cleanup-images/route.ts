@@ -114,6 +114,43 @@ export async function POST(request: NextRequest) {
           }
           fs.rmdirSync(dirPath);
           deleted.push(dir);
+        } else {
+          const projectDir = path.join(uploadDir, dir);
+          const dirEntries = fs.readdirSync(projectDir, { withFileTypes: true });
+          const physicalFiles = dirEntries
+            .filter(e => e.isFile() && !e.name.startsWith('.'))
+            .map(e => e.name);
+
+          const project = data.projects.find((p: Project) => p.id === dir);
+          if (project) {
+            const validFiles = new Set<string>();
+            if (project.images) {
+              for (const img of project.images) {
+                const urlPath = img.url.split('/').pop();
+                const thumbPath = img.thumb_url?.split('/').pop();
+                if (urlPath) validFiles.add(urlPath);
+                if (thumbPath) validFiles.add(thumbPath);
+              }
+            }
+
+            const orphanedFiles = physicalFiles.filter(f => !validFiles.has(f));
+            for (const f of orphanedFiles) {
+              const filePath = path.join(projectDir, f);
+              if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
+                fs.unlinkSync(filePath);
+                deleted.push(`${dir}/${f}`);
+              }
+            }
+
+            let remaining = 0;
+            if (fs.existsSync(projectDir)) {
+              remaining = fs.readdirSync(projectDir).filter(f => !f.startsWith('.')).length;
+            }
+            if (remaining === 0) {
+              fs.rmdirSync(projectDir);
+              deleted.push(`(empty dir ${dir})`);
+            }
+          }
         }
       }
     } else if (files && Array.isArray(files)) {
