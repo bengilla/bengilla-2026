@@ -40,6 +40,7 @@ export const CATEGORY_LABELS: Record<Locale, Record<string, string>> = {
   zh: {
     stage: '舞台设计',
     lighting: '灯光设计',
+    exhibition: '展会设计',
     architecture: '建筑设计',
     product: '产品设计',
     graphic: '平面设计',
@@ -50,6 +51,7 @@ export const CATEGORY_LABELS: Record<Locale, Record<string, string>> = {
   ja: {
     stage: 'ステージデザイン',
     lighting: '照明デザイン',
+    exhibition: '展示会デザイン',
     architecture: '建築デザイン',
     product: 'プロダクトデザイン',
     graphic: 'グラフィックデザイン',
@@ -60,6 +62,7 @@ export const CATEGORY_LABELS: Record<Locale, Record<string, string>> = {
   ko: {
     stage: '무대 디자인',
     lighting: '조명 디자인',
+    exhibition: '전시회 디자인',
     architecture: '건축 디자인',
     product: '제품 디자인',
     graphic: '그래픽 디자인',
@@ -70,6 +73,7 @@ export const CATEGORY_LABELS: Record<Locale, Record<string, string>> = {
   en: {
     stage: 'Stage Design',
     lighting: 'Lighting Design',
+    exhibition: 'Exhibition Design',
     architecture: 'Architecture',
     product: 'Product Design',
     graphic: 'Graphic Design',
@@ -80,6 +84,7 @@ export const CATEGORY_LABELS: Record<Locale, Record<string, string>> = {
   de: {
     stage: 'Bühnengestaltung',
     lighting: 'Lichtgestaltung',
+    exhibition: 'Ausstellungsdesign',
     architecture: 'Architektur',
     product: 'Produktdesign',
     graphic: 'Grafikdesign',
@@ -90,6 +95,7 @@ export const CATEGORY_LABELS: Record<Locale, Record<string, string>> = {
   fr: {
     stage: 'Conception de scène',
     lighting: 'Conception éclairage',
+    exhibition: 'Design d\'exposition',
     architecture: 'Architecture',
     product: 'Design de produit',
     graphic: 'Design graphique',
@@ -100,6 +106,7 @@ export const CATEGORY_LABELS: Record<Locale, Record<string, string>> = {
   es: {
     stage: 'Diseño de escenario',
     lighting: 'Diseño de iluminación',
+    exhibition: 'Diseño de exposición',
     architecture: 'Arquitectura',
     product: 'Diseño de producto',
     graphic: 'Diseño gráfico',
@@ -110,6 +117,7 @@ export const CATEGORY_LABELS: Record<Locale, Record<string, string>> = {
   it: {
     stage: 'Progettazione del palco',
     lighting: 'Progettazione luci',
+    exhibition: 'Design di esposizione',
     architecture: 'Architettura',
     product: 'Progettazione del prodotto',
     graphic: 'Design grafico',
@@ -120,6 +128,7 @@ export const CATEGORY_LABELS: Record<Locale, Record<string, string>> = {
   pt: {
     stage: 'Design de palco',
     lighting: 'Design de iluminação',
+    exhibition: 'Design de exposição',
     architecture: 'Arquitetura',
     product: 'Design de produto',
     graphic: 'Design gráfico',
@@ -130,6 +139,7 @@ export const CATEGORY_LABELS: Record<Locale, Record<string, string>> = {
   ru: {
     stage: 'Дизайн сцены',
     lighting: 'Дизайн освещения',
+    exhibition: 'Дизайн выставки',
     architecture: 'Архитектура',
     product: 'Дизайн продукта',
     graphic: 'Графический дизайн',
@@ -140,6 +150,7 @@ export const CATEGORY_LABELS: Record<Locale, Record<string, string>> = {
   ar: {
     stage: 'تصميم المسرح',
     lighting: 'تصميم الإضاءة',
+    exhibition: 'تصميم المعرض',
     architecture: 'هندسة معمارية',
     product: 'تصميم المنتج',
     graphic: 'التصميم الجرافيكي',
