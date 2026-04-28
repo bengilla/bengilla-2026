@@ -7,7 +7,7 @@ type Locale =
   | 'zh' | 'ja' | 'ko' | 'de' | 'fr' | 'es'
   | 'it' | 'pt' | 'ru' | 'ar' | 'en';
 
-export const LOCALES: Locale[] = [
+const LOCALES: Locale[] = [
   'zh', 'ja', 'ko', 'de', 'fr', 'es', 'it', 'pt', 'ru', 'ar',
 ];
 
@@ -172,76 +172,64 @@ export function tCategory(category: string): string {
 /**
  * UI text translations for Header
  */
-export const UI_LABELS: Record<Locale, { 
-  projects: string; 
+export const UI_LABELS: Record<Locale, {
+  projects: string;
   selected: (n: number) => string;
-  emailCopied: string;
   contactMe: string;
 }> = {
   zh: {
     projects: '项目',
     selected: (n) => `已选 · ${n} 个项目`,
-    emailCopied: '邮箱地址已复制',
     contactMe: '欢迎联系我',
   },
   ja: {
     projects: 'プロジェクト',
     selected: (n) => `選択中 · ${n} プロジェクト`,
-    emailCopied: 'メールアドレスをコピーしました',
     contactMe: 'お問い合わせ',
   },
   ko: {
     projects: '프로젝트',
     selected: (n) => `선택됨 · ${n} 프로젝트`,
-    emailCopied: '이메일 주소가 복사되었습니다',
     contactMe: '연락처',
   },
   en: {
     projects: 'Projects',
     selected: (n) => `Selected · ${n} Projects`,
-    emailCopied: 'Email address copied',
     contactMe: 'Contact me',
   },
   de: {
     projects: 'Projekte',
     selected: (n) => `Ausgewählt · ${n} Projekte`,
-    emailCopied: 'E-Mail-Adresse kopiert',
     contactMe: 'Kontakt',
   },
   fr: {
     projects: 'Projets',
     selected: (n) => `Sélectionné · ${n} projets`,
-    emailCopied: 'Adresse e-mail copiée',
     contactMe: 'Contactez-moi',
   },
   es: {
     projects: 'Proyectos',
     selected: (n) => `Seleccionado · ${n} proyectos`,
-    emailCopied: 'Dirección de correo copiada',
     contactMe: 'Contáctame',
   },
   it: {
     projects: 'Progetti',
     selected: (n) => `Selezionato · ${n} progetti`,
-    emailCopied: 'Indirizzo email copiato',
     contactMe: 'Contattami',
   },
   pt: {
     projects: 'Projetos',
     selected: (n) => `Selecionado · ${n} projetos`,
-    emailCopied: 'Endereço de e-mail copiado',
     contactMe: 'Entre em contato',
   },
   ru: {
     projects: 'Проекты',
     selected: (n) => `Выбрано · ${n} проектов`,
-    emailCopied: 'Электронная почта скопирована',
     contactMe: 'Свяжитесь со мной',
   },
   ar: {
     projects: 'المشاريع',
     selected: (n) => `محدد · ${n} مشاريع`,
-    emailCopied: 'تم نسخ البريد الإلكتروني',
     contactMe: 'تواصل معي',
   },
 };
@@ -258,13 +246,6 @@ export function tProjects(): string {
  */
 export function tSelected(count: number): string {
   return UI_LABELS[getLocale()]?.selected(count) || `Selected · ${count} Projects`;
-}
-
-/**
- * Get "Email copied" text
- */
-export function tEmailCopied(): string {
-  return UI_LABELS[getLocale()]?.emailCopied || 'Email address copied';
 }
 
 /**

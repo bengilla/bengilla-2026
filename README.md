@@ -1,80 +1,78 @@
 # BENGILLA Portfolio
 
-A modern portfolio website built with Next.js 14, featuring a CMS for project management.
+基于 Next.js 14 的作品集网站，内置 CMS 管理后台。
 
-## Features
+## 功能
 
-- 🎨 Responsive design with multi-language support (11 languages)
-- 📱 Mobile-optimized with touch gestures
-- 🔐 Secure admin authentication
-- 📷 Image upload and management
-- 🌐 React Server Components
+- 响应式设计，支持 11 种语言
+- 移动端优化，支持触摸手势
+- 安全的管理员认证系统（iron-session + bcrypt）
+- 图片上传和管理（sharp 缩略图生成）
+- 完整的管理后台：项目 CRUD、图片管理、密码修改、无用图片清理
 
-## Getting Started
-
-### Prerequisites
-
-- Node.js 18+
-- npm or yarn
-
-### Installation
+## 快速开始
 
 ```bash
-# Clone the repository
-git clone https://github.com/yourusername/bengilla-portfolio.git
-cd bengilla-portfolio
-
-# Install dependencies
+# 安装依赖
 npm install
 
-# Copy environment file
+# 配置环境变量
 cp .env.local.example .env.local
 
-# Start development server
+# 启动开发服务器
 npm run dev
-```
 
-### Configuration
-
-Edit `.env.local` with your own values:
-
-```env
-# Session password (min 32 characters)
-# Generate with: openssl rand -base64 32
-SESSION_PASSWORD=your-secure-32-character-password-here
-
-# Admin password (change after first login)
-ADMIN_PASSWORD=admin123
-```
-
-## Usage
-
-- **Homepage**: http://localhost:3000
-- **Admin Login**: http://localhost:3000/admin
-  - Default credentials: `admin` / `admin123`
-
-## Build
-
-```bash
-# Build for production
+# 构建生产版本
 npm run build
 
-# Start production server
+# 启动生产服务器
 npm run start
 ```
 
-## Security Notes
+## 环境配置
 
-- Never commit `.env.local` - it's in `.gitignore`
-- Never commit `data.json` - contains admin credentials
-- Change the default admin password after first login
-- Use a secure `SESSION_PASSWORD` (32+ characters)
+编辑 `.env.local`:
 
-## Tech Stack
+```env
+# Session 加密密码（至少 32 字符）
+# 生成: openssl rand -base64 32
+SESSION_PASSWORD=your-secure-32-character-password-here
+
+# 管理员密码（首次登录后请修改）
+ADMIN_PASSWORD=admin123
+```
+
+## 使用
+
+- **首页**: http://localhost:3000
+- **管理后台**: http://localhost:3000/admin
+  - 默认账号: `admin` / `admin123`
+
+## 部署
+
+```bash
+make deploy
+```
+
+自动执行：SSH 连接 VPS → git pull → npm run build → pm2 restart
+
+## 安全
+
+- `data.json`、`lib/auth.json`、`.env.local`、`public/uploads/` 已在 `.gitignore` 中，禁止提交
+- Session 密码务必使用 32 字符以上的随机字符串
+- 首次登录后请立即修改默认密码
+- 登录接口有频率限制（5 次失败后锁定 15 分钟）
+
+## 技术栈
 
 - Next.js 14 (App Router)
-- TypeScript
+- TypeScript (strict mode)
 - React 18
-- iron-session
-- bcryptjs
-- sharp (image processing)
+- iron-session（Session 认证）
+- bcryptjs（密码哈希）
+- sharp（图片处理）
+- JSON 文件存储（无数据库）
+
+## 项目文档
+
+详见项目根目录的 `CLAUDE.md`，包含架构说明、API 路由表、数据模型、注意事项等。

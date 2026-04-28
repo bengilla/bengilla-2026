@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import styles from './edit.module.css';
 import { CATEGORIES } from '@/lib/types';
@@ -12,7 +11,6 @@ export default function EditProjectPage({
 }: {
   params: { id: string };
 }) {
-  const router = useRouter();
   const [projectId, setProjectId] = useState<string>('');
   const [project, setProject] = useState<Project | null>(null);
   const [nameZh, setNameZh] = useState('');

@@ -69,10 +69,6 @@ export default function NewProjectPage() {
   const [modal, setModal] = useState({ open: false, title: '', message: '' });
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  function showModal(title: string, message: string) {
-    setModal({ open: true, title, message });
-  }
-
   function handleFileUpload(files: FileList | null) {
     if (!files) return;
     const fileArray = Array.from(files);

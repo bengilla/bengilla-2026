@@ -41,6 +41,10 @@ yarn-error.log*
 *.swo
 *~
 
+# Debug/testing artifacts
+cookies.txt
+test.png
+
 # OS
 Thumbs.db
 .DS_Store
